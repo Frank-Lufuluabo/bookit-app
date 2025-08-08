@@ -27,3 +27,14 @@ model Company {
   createdById         String
   createdBy           User    @relation("CompanyCreators" , fields: [createdById] , references: [id])
 }
+
+model Room {
+   id             String  @id @default(cuid())
+   name           String  
+   capacity       Int
+   description    String?
+   imgUrl         String?
+   companyId      String
+   company        Company    @relation(fields: [companyId], references: [id])  
+  reservations     Reservation[]
+}
