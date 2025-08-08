@@ -38,3 +38,16 @@ model Room {
    company        Company    @relation(fields: [companyId], references: [id])  
   reservations     Reservation[]
 }
+
+model Reservation {
+   id               String  @id @default(cuid())
+   userId           String
+   user             User    @relation(fields: [userId], references: [id]) 
+   roomId           String
+   room             Room    @relation(fields: [roomId], references: [id]) 
+   reservationDate  String  
+   startTime        String
+   endTime          String
+
+   @@unique([roomId , reservationDate , startTime])
+}
